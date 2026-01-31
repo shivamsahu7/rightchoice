@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1768654846236,
+      "tag": "0000_smiling_firebrand",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1768655279900,
+      "tag": "0001_dashing_starfox",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1768656580084,
+      "tag": "0002_thick_outlaw_kid",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1768657221364,
+      "tag": "0003_harsh_baron_strucker",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1768678815566,
+      "tag": "0004_good_mandarin",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1768681419970,
+      "tag": "0005_right_lady_ursula",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1768682122396,
+      "tag": "0006_fearless_nebula",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1768757042888,
+      "tag": "0007_modern_sumo",
+      "breakpoints": true
+    }
+  ]
+}

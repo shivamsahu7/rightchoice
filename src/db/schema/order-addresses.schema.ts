@@ -1,0 +1,25 @@
+import { pgTable, serial, varchar, integer } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
+import { states } from './states.schema'
+
+export const orderAddresses = pgTable('order_addresses', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 100 }).notNull(),
+  phone: varchar('phone', { length: 10 }).notNull(),
+  pincode: varchar('pincode', { length: 6 }).notNull(),
+  locality: varchar('locality', { length: 255 }).notNull(),
+  address: varchar('address', { length: 255 }).notNull(),
+  city: varchar('city', { length: 20 }).notNull(),
+  stateId: integer('state_id')
+    .notNull()
+    .references(() => states.id),
+  landmark: varchar('landmark', { length: 255 }),
+  alternatePhone: varchar('alternate_phone', { length: 10 }),
+})
+
+export const orderAddressesRelations = relations(orderAddresses, ({ one }) => ({
+  state: one(states, {
+    fields: [orderAddresses.stateId],
+    references: [states.id],
+  }),
+}))
