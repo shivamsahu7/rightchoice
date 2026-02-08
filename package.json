@@ -6,7 +6,9 @@
     "dev": "bun run --watch src/index.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "bun run src/db/seeders/index.ts"
+    "db:seed": "bun run src/db/seeders/index.ts",
+    "build": "bun build ./src/index.ts --outdir ./dist --target bun",
+    "start": "NODE_ENV=production bun run ./dist/index.js"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.1",
