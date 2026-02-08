@@ -1,3 +1,16 @@
+CREATE TABLE "media_directories" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL,
+	"path" varchar NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "media" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL,
+	"path" varchar NOT NULL,
+	"media_directory_id" integer NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"first_name" varchar(50) NOT NULL,
@@ -15,3 +28,5 @@ CREATE TABLE "users" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );
+--> statement-breakpoint
+ALTER TABLE "media" ADD CONSTRAINT "media_media_directory_id_media_directories_id_fk" FOREIGN KEY ("media_directory_id") REFERENCES "public"."media_directories"("id") ON DELETE no action ON UPDATE no action;
