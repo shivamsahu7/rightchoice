@@ -2,8 +2,6 @@ import { Elysia } from 'elysia';
 import { swagger } from '@elysiajs/swagger';
 import { cors } from '@elysiajs/cors';
 import { adminRoutes } from './routes/admin';
-import { googleAuthRoutes } from './routes/google-auth.route';
-import { reviewRoutes } from './routes/review.route';
 
 const app = new Elysia()
   .use(cors())
@@ -21,12 +19,6 @@ const app = new Elysia()
   )
   .group('/api/v1', (app) =>
     app.use(adminRoutes)
-  )
-  .group('/api/v1', (app) =>
-    app.use(googleAuthRoutes)
-  )
-  .group('/api/v1', (app) =>
-    app.use(reviewRoutes)
   )
 
 
