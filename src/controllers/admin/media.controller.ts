@@ -1,6 +1,7 @@
 import { MediaDirectoryModel } from '../../models/media-directory.model';
+import { sendSuccess, sendError } from '../../utils/response.helper';
 
-export const listMediaDirectories = async ({ query, error }: any) => {
+export const listMediaDirectories = async ({ query, error, set }: any) => {
   try {
     // Parse pagination params, providing defaults
     const page = parseInt(query.page || '1');
@@ -12,8 +13,7 @@ export const listMediaDirectories = async ({ query, error }: any) => {
       MediaDirectoryModel.count()
     ]);
 
-    return {
-      message: 'Media directories retrieved successfully',
+    return sendSuccess({ set }, 'Media directories retrieved successfully', {
       data,
       meta: {
         total,
@@ -21,8 +21,8 @@ export const listMediaDirectories = async ({ query, error }: any) => {
         limit,
         totalPages: Math.ceil(total / limit)
       }
-    };
+    });
   } catch (e) {
-    return error(500, { message: 'Failed to fetch media directories' });
+    return sendError({ set }, 'Failed to fetch media directories', {}, 500);
   }
 };

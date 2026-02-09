@@ -1,4 +1,6 @@
 import { UserModel } from '../../models/user.model';
+import { sendSuccess, sendError } from '../../utils/response.helper';
+import { SuccessMessages, ErrorMessages } from '../../common/messages';
 
 export const login = async ({ body, error, request, authJwt, set }: any) => {
   const { email, password } = body;
@@ -7,14 +9,14 @@ export const login = async ({ body, error, request, authJwt, set }: any) => {
   const user = await UserModel.findByEmail(email);
 
   if (!user) {
-    return error(404, { message: 'User not found' });
+    return sendError({ set }, ErrorMessages.NOT_FOUND, {}, 404);
   }
 
   const isPasswordValid = await Bun.password.verify(password, user.password);
 
   if (!isPasswordValid) {
     await UserModel.incrementLoginAttempts(user.id);
-    return error(401, { message: 'Invalid credentials' });
+    return sendError({ set }, ErrorMessages.INVALID_CREDENTIALS, {}, 401);
   }
 
   await UserModel.updateLastLogin(user.id, ipAddress);
@@ -29,13 +31,12 @@ export const login = async ({ body, error, request, authJwt, set }: any) => {
   // Attach to response header
   set.headers['Authorization'] = `Bearer ${token}`;
 
-  return {
-    message: 'Login successful',
+  return sendSuccess({ set }, SuccessMessages.LOGIN_SUCCESSFUL, {
     user: {
       id: user.id,
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName
     }
-  };
+  });
 };
